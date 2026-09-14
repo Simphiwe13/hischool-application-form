@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2027 Learner Application Form</title>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; background: #f4f8ff;">
+
+<!-- Custom High School Application Form -->
+<section id="application-section" style="padding: 40px 10%;">
+    <div style="max-width: 750px; margin: 0 auto; background: #ffffff; padding: 35px; border-radius: 10px; border-top: 6px solid #0A2A8F; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+        
+        <h2 style="color: #0A2A8F; text-align: center; border: none; padding-left: 0; margin-bottom: 8px;">
+            2027 Learner Application Form
+        </h2>
+        <p style="text-align: center; color: #555; margin-bottom: 30px; font-size: 14px;">
+            Please complete all required fields accurately. Once submitted, your application status can be tracked using the Parent/Guardian ID.
+        </p>
+
+        <form id="hsApplicationForm" onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 20px;" novalidate>
+            
+            <!-- SECTION 1: LEARNER DETAILS -->
+            <div style="border-bottom: 2px solid #eef4ff; padding-bottom: 15px;">
+                <h3 style="color: #0A2A8F; margin-bottom: 15px; font-size: 18px;">1. Learner Information</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">First Name(s) *</label>
+                        <input type="text" id="learnerName" required placeholder="e.g. Sipho" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Surname *</label>
+                        <input type="text" id="learnerSurname" required placeholder="e.g. Dlamini" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Learner ID / Date of Birth *</label>
+                        <input type="text" id="learnerId" required placeholder="ID Number or YYYY-MM-DD" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Gender *</label>
+                        <select id="gender" required style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Grade Applying For *</label>
+                        <select id="grade" required style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                            <option value="">Select Grade</option>
+                            <option value="Grade 8">Grade 8</option>
+                            <option value="Grade 9">Grade 9</option>
+                            <option value="Grade 10">Grade 10</option>
+                            <option value="Grade 11">Grade 11</option>
+                            <option value="Grade 12">Grade 12</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Previous / Current School *</label>
+                        <input type="text" id="prevSchool" required placeholder="Name of primary or current school" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: PARENT / GUARDIAN DETAILS -->
+            <div>
+                <h3 style="color: #0A2A8F; margin-bottom: 15px; font-size: 18px;">2. Parent / Guardian Details</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Full Name & Surname *</label>
+                        <input type="text" id="parentName" required placeholder="Parent or Guardian Name" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Parent ID / Passport Number *</label>
+                        <input type="text" id="appParentId" required placeholder="13-Digit SA ID or Passport" maxlength="13" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Phone Number *</label>
+                        <input type="tel" id="phone" required placeholder="e.g. 0821234567" maxlength="10" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+
+                    <div>
+                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Email Address *</label>
+                        <input type="email" id="email" required placeholder="e.g. parent@example.com" 
+                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <div style="margin-top: 15px;">
+                    <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Residential Address *</label>
+                    <input type="text" id="address" required placeholder="Street / Village name, Town, Postal Code" 
+                           style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+                </div>
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" id="submitAppBtn" 
+                    style="background: #0A2A8F; color: white; padding: 14px; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; transition: 0.2s;">
+                Submit Application
+            </button>
+        </form>
+
+        <!-- RESPONSE NOTIFICATION BOX -->
+        <div id="appResponse" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none; text-align: center; font-weight: bold;"></div>
+    </div>
+</section>
+
+<script>
+  // Your Deployed Google Apps Script Web App URL
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsIH7IO0M-IS7RgA2Jbg8--oNmuTd3wxtfx4C-r3r7X9IPpBlq7UdoYkX1o24x5YTH/exec';
+
+  function showError(message) {
+    const responseBox = document.getElementById('appResponse');
+    responseBox.style.display = 'block';
+    responseBox.style.background = '#f8d7da';
+    responseBox.style.color = '#842029';
+    responseBox.innerText = message;
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    const form = document.getElementById('hsApplicationForm');
+    const submitBtn = document.getElementById('submitAppBtn');
+    const responseBox = document.getElementById('appResponse');
+
+    // 1. Gather values
+    const learnerName = document.getElementById('learnerName').value.trim();
+    const learnerSurname = document.getElementById('learnerSurname').value.trim();
+    const learnerId = document.getElementById('learnerId').value.trim();
+    const gender = document.getElementById('gender').value;
+    const grade = document.getElementById('grade').value;
+    const prevSchool = document.getElementById('prevSchool').value.trim();
+    const parentName = document.getElementById('parentName').value.trim();
+    const appParentId = document.getElementById('appParentId').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const address = document.getElementById('address').value.trim();
+
+    // 2. Data Validations
+    if (!learnerName || !learnerSurname || !learnerId || !gender || !grade || !prevSchool || !parentName || !appParentId || !phone || !email || !address) {
+      showError('Please complete all required fields.');
+      return;
+    }
+
+    // SA ID / Passport Check (Must be 13 digits if numeric, or at least 6 characters for passport)
+    if (appParentId.length < 6) {
+      showError('Parent/Guardian ID or Passport must be at least 6 characters.');
+      return;
+    }
+
+    // SA Phone Validation (Must start with 0 and contain exactly 10 digits)
+    const phoneRegex = /^0[0-9]{9}$/;
+    if (!phoneRegex.test(phone)) {
+      showError('Phone number must start with 0 and be exactly 10 digits (e.g. 0821234567).');
+      return;
+    }
+
+    // Email Address Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showError('Please enter a valid email address.');
+      return;
+    }
+
+    // 3. Preparation for Send
+    responseBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Submitting Application...';
+
+    const formData = {
+      learnerName,
+      learnerSurname,
+      learnerId,
+      gender,
+      grade,
+      prevSchool,
+      parentName,
+      appParentId,
+      phone,
+      email,
+      address
+    };
+
+    // 4. Submit Payload to Google Apps Script
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.result === 'success') {
+        responseBox.style.display = 'block';
+        responseBox.style.background = '#d1e7dd';
+        responseBox.style.color = '#0f5132';
+        responseBox.innerText = 'Application submitted successfully! Keep your Parent ID for status tracking.';
+        form.reset();
+      } else {
+        throw new Error(data.error || 'Submission failed');
+      }
+    })
+    .catch(error => {
+      showError('Submission error. Please check your network connection and try again.');
+      console.error('Submission Error:', error.message);
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerText = 'Submit Application';
+    });
+  }
+</script>
+
+</body>
+</html>
