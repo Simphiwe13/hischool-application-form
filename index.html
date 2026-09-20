@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -511,95 +510,53 @@
         'https://script.google.com/macros/s/AKfycbxF5CPu-dmN9_KMWN4tb3j_Uf1jLSIMtX1-ZlaWafQ7DoRvQAvQmofAZL1Ej1Wl8xrA/exec';
 
 
-
     /*
      * SHOW MESSAGE
      */
-
     function showMessage(message, success) {
-
-        const responseBox =
-            document.getElementById('appResponse');
-
+        const responseBox = document.getElementById('appResponse');
         responseBox.style.display = 'block';
 
         if (success) {
-
             responseBox.style.background = '#d1e7dd';
             responseBox.style.color = '#0f5132';
-
         } else {
-
             responseBox.style.background = '#f8d7da';
             responseBox.style.color = '#842029';
-
         }
 
         responseBox.innerText = message;
-
     }
-
 
 
     /*
      * SUBMIT APPLICATION
      */
-
     async function submitForm(e) {
-
         e.preventDefault();
 
-
-        const form =
-            document.getElementById('hsApplicationForm');
-
-        const submitBtn =
-            document.getElementById('submitAppBtn');
-
+        const form = document.getElementById('hsApplicationForm');
+        const submitBtn = document.getElementById('submitAppBtn');
 
         /*
          * GET FORM VALUES
          */
-
-        const learnerName =
-            document.getElementById('learnerName').value.trim();
-
-        const learnerSurname =
-            document.getElementById('learnerSurname').value.trim();
-
-        const learnerId =
-            document.getElementById('learnerId').value.trim();
-
-        const gender =
-            document.getElementById('gender').value;
-
-        const grade =
-            document.getElementById('grade').value;
-
-        const prevSchool =
-            document.getElementById('prevSchool').value.trim();
-
-        const parentName =
-            document.getElementById('parentName').value.trim();
-
-        const appParentId =
-            document.getElementById('appParentId').value.trim();
-
-        const phone =
-            document.getElementById('phone').value.trim();
-
-        const email =
-            document.getElementById('email').value.trim();
-
-        const address =
-            document.getElementById('address').value.trim();
-
+        const learnerName = document.getElementById('learnerName').value.trim();
+        const learnerSurname = document.getElementById('learnerSurname').value.trim();
+        const learnerId = document.getElementById('learnerId').value.trim();
+        const gender = document.getElementById('gender').value;
+        const grade = document.getElementById('grade').value;
+        const prevSchool = document.getElementById('prevSchool').value.trim();
+        const parentName = document.getElementById('parentName').value.trim();
+        const appParentId = document.getElementById('appParentId').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const address = document.getElementById('address').value.trim();
 
 
         /*
-         * REQUIRED FIELD VALIDATION
+         * 1. REQUIRED FIELDS CHECK
          */
-
         if (
             !learnerName ||
             !learnerSurname ||
@@ -613,332 +570,183 @@
             !email ||
             !address
         ) {
-
-            showMessage(
-                'Please complete all required fields.',
-                false
-            );
-
+            showMessage('Please complete all required fields.', false);
             return;
-
         }
 
 
-
         /*
-         * PARENT ID / PASSPORT VALIDATION
+         * 2. LEARNER NAME & SURNAME VALIDATION
          */
-
-        if (appParentId.length < 6) {
-
-            showMessage(
-                'Parent/Guardian ID or Passport must be at least 6 characters.',
-                false
-            );
-
+        const nameRegex = /^[a-zA-Z\s'-]{2,}$/;
+        if (!nameRegex.test(learnerName)) {
+            showMessage('Learner First Name(s) should contain only letters and be at least 2 characters.', false);
             return;
-
+        }
+        if (!nameRegex.test(learnerSurname)) {
+            showMessage('Learner Surname should contain only letters and be at least 2 characters.', false);
+            return;
         }
 
 
+        /*
+         * 3. LEARNER ID / DOB VALIDATION
+         */
+        const isLearnerIdNumeric = /^\d+$/.test(learnerId);
+        const dobRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+        if (isLearnerIdNumeric) {
+            if (learnerId.length !== 13) {
+                showMessage('Incomplete Learner ID. SA ID must be exactly 13 digits.', false);
+                return;
+            }
+        } else if (!dobRegex.test(learnerId)) {
+            showMessage('Learner ID/DOB must be a 13-digit SA ID or formatted as YYYY-MM-DD.', false);
+            return;
+        }
+
 
         /*
-         * PHONE VALIDATION
+         * 4. PREVIOUS SCHOOL VALIDATION
          */
+        if (prevSchool.length < 2) {
+            showMessage('Please enter a valid school name (at least 2 characters).', false);
+            return;
+        }
 
-        const phoneRegex =
-            /^0[0-9]{9}$/;
 
+        /*
+         * 5. PARENT NAME VALIDATION
+         */
+        if (!nameRegex.test(parentName)) {
+            showMessage('Parent/Guardian name should contain only letters and be at least 2 characters.', false);
+            return;
+        }
+
+
+        /*
+         * 6. PARENT ID / PASSPORT VALIDATION
+         * Fixes incomplete ID issue: If input is numeric, force exactly 13 digits.
+         */
+        const isParentIdNumeric = /^\d+$/.test(appParentId);
+
+        if (isParentIdNumeric) {
+            if (appParentId.length !== 13) {
+                showMessage(
+                    'Incomplete SA ID. Parent/Guardian ID must be exactly 13 digits.',
+                    false
+                );
+                return;
+            }
+        } else {
+            const passportRegex = /^[a-zA-Z0-9]{6,9}$/;
+            if (!passportRegex.test(appParentId)) {
+                showMessage(
+                    'Invalid Passport number. Passport must be 6–9 alphanumeric characters.',
+                    false
+                );
+                return;
+            }
+        }
+
+
+        /*
+         * 7. PHONE VALIDATION
+         */
+        const phoneRegex = /^0[0-9]{9}$/;
         if (!phoneRegex.test(phone)) {
-
-            showMessage(
-                'Phone number must start with 0 and be exactly 10 digits (e.g. 0821234567).',
-                false
-            );
-
+            showMessage('Phone number must start with 0 and be exactly 10 digits (e.g. 0821234567).', false);
             return;
-
         }
-
 
 
         /*
-         * EMAIL VALIDATION
+         * 8. EMAIL VALIDATION
          */
-
-        const emailRegex =
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-
-            showMessage(
-                'Please enter a valid email address.',
-                false
-            );
-
+            showMessage('Please enter a valid email address.', false);
             return;
-
         }
 
+
+        /*
+         * 9. RESIDENTIAL ADDRESS VALIDATION
+         */
+        if (address.length < 5) {
+            showMessage('Please enter a complete residential address (at least 5 characters).', false);
+            return;
+        }
 
 
         /*
          * DISABLE BUTTON
          */
-
         submitBtn.disabled = true;
-
         submitBtn.style.opacity = '0.7';
-
         submitBtn.style.cursor = 'not-allowed';
+        submitBtn.innerText = 'Submitting Application...';
 
-        submitBtn.innerText =
-            'Submitting Application...';
-
-
+        document.getElementById('appResponse').style.display = 'none';
 
         /*
-         * CLEAR OLD MESSAGE
+         * CREATE PAYLOAD
          */
-
-        document.getElementById(
-            'appResponse'
-        ).style.display = 'none';
-
-
-
-        /*
-         * CREATE URL ENCODED DATA
-         *
-         * This matches:
-         * e.parameter
-         *
-         * in Google Apps Script.
-         */
-
-        const payload =
-            new URLSearchParams();
-
-        payload.append(
-            'learnerName',
-            learnerName
-        );
-
-        payload.append(
-            'learnerSurname',
-            learnerSurname
-        );
-
-        payload.append(
-            'learnerId',
-            learnerId
-        );
-
-        payload.append(
-            'gender',
-            gender
-        );
-
-        payload.append(
-            'grade',
-            grade
-        );
-
-        payload.append(
-            'prevSchool',
-            prevSchool
-        );
-
-        payload.append(
-            'parentName',
-            parentName
-        );
-
-        payload.append(
-            'appParentId',
-            appParentId
-        );
-
-        payload.append(
-            'phone',
-            phone
-        );
-
-        payload.append(
-            'email',
-            email
-        );
-
-        payload.append(
-            'address',
-            address
-        );
-
-
-
-        /*
-         * SEND TO GOOGLE APPS SCRIPT
-         *
-         * IMPORTANT:
-         * We use no custom headers here.
-         * This helps avoid unnecessary CORS
-         * preflight requests.
-         */
+        const payload = new URLSearchParams();
+        payload.append('learnerName', learnerName);
+        payload.append('learnerSurname', learnerSurname);
+        payload.append('learnerId', learnerId);
+        payload.append('gender', gender);
+        payload.append('grade', grade);
+        payload.append('prevSchool', prevSchool);
+        payload.append('parentName', parentName);
+        payload.append('appParentId', appParentId);
+        payload.append('phone', phone);
+        payload.append('email', email);
+        payload.append('address', address);
 
         try {
-
-            const response =
-                await fetch(
-                    SCRIPT_URL,
-                    {
-                        method: 'POST',
-                        body: payload
-                    }
-                );
-
-
-            /*
-             * Check HTTP response
-             */
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: payload
+            });
 
             if (!response.ok) {
-
-                throw new Error(
-                    'Google Apps Script returned HTTP ' +
-                    response.status
-                );
-
+                throw new Error('Google Apps Script returned HTTP ' + response.status);
             }
 
-
-            /*
-             * Read response as text first.
-             *
-             * This is more reliable than immediately
-             * calling response.json().
-             */
-
-            const responseText =
-                await response.text();
-
-
-            console.log(
-                'Google Apps Script response:',
-                responseText
-            );
-
-
-            /*
-             * Try to convert response to JSON
-             */
-
+            const responseText = await response.text();
             let result;
 
             try {
-
-                result =
-                    JSON.parse(responseText);
-
+                result = JSON.parse(responseText);
             } catch (jsonError) {
-
-                /*
-                 * Google Apps Script sometimes returns
-                 * a redirect/HTML response instead of JSON.
-                 */
-
-                console.error(
-                    'Invalid JSON response:',
-                    responseText
-                );
-
-                throw new Error(
-                    'The server responded, but did not return a valid JSON response.'
-                );
-
+                throw new Error('The server responded, but did not return a valid JSON response.');
             }
 
-
-
-            /*
-             * SUCCESS
-             */
-
-            if (
-                result &&
-                result.result === 'success'
-            ) {
-
+            if (result && result.result === 'success') {
                 showMessage(
-                    'Application submitted successfully! Please keep your Parent/Guardian ID for status tracking.',
+                    'Application submitted successfully! Please use your Parent/Guardian ID for status tracking.',
                     true
                 );
-
-
                 form.reset();
-
-
             } else {
-
-                /*
-                 * APPS SCRIPT RETURNED AN ERROR
-                 */
-
-                const serverError =
-                    result && result.error
-                        ? result.error
-                        : 'Unknown server error.';
-
-
-                throw new Error(
-                    serverError
-                );
-
+                const serverError = result && result.error ? result.error : 'Unknown server error.';
+                throw new Error(serverError);
             }
 
-
         } catch (error) {
-
-            console.error(
-                'Submission Error:',
-                error
-            );
-
-
-            /*
-             * SHOW THE REAL ERROR
-             *
-             * This will help us diagnose the
-             * exact problem if submission still fails.
-             */
-
-            showMessage(
-                'Submission failed: ' +
-                error.message,
-                false
-            );
-
-
+            console.error('Submission Error:', error);
+            showMessage('Submission failed: ' + error.message, false);
         } finally {
-
-            /*
-             * ENABLE BUTTON AGAIN
-             */
-
             submitBtn.disabled = false;
-
             submitBtn.style.opacity = '1';
-
             submitBtn.style.cursor = 'pointer';
-
-            submitBtn.innerText =
-                'Submit Application';
-
+            submitBtn.innerText = 'Submit Application';
         }
-
     }
 
 </script>
 
 </body>
 </html>
-```
