@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Mahlabathini High School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Required for Google Apps Script Web Apps to handle framing correctly -->
     <base target="_top">
 
     <style>
@@ -75,7 +74,7 @@
             text-decoration:underline;
         }
 
-        /* Hero Banner Section - Blue overlay removed from image */
+        /* Hero Banner Section */
         .hero{
             background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://lh3.googleusercontent.com/d/1Ym6BwMyTZ2eGiLBxIKUi9BevIf-xubJQ') center/cover;
             height:400px;
@@ -184,7 +183,7 @@
     <a onclick="scrollToSection(event, 'announcements')">Announcements</a>
     <a onclick="scrollToSection(event, 'academics')">Academics</a>
     <a onclick="scrollToSection(event, 'activities')">Activities</a>
-    <a onclick="scrollToSection(event, 'status-check')">check status</a>
+    <a onclick="scrollToSection(event, 'status-check')">Check Status</a>
     <a onclick="scrollToSection(event, 'contact')">Contact</a>
 </nav>
 
@@ -277,10 +276,10 @@
         </p>
         
         <div style="display: flex; flex-direction: column; gap: 15px;">
-            <input type="text" id="parentId" placeholder="Enter ID Number (e.g., 950123...)" 
+            <input type="text" id="parentId" placeholder="Enter ID Number or Passport" 
                    style="width: 100%; padding: 12px; border: 2px solid #0A2A8F; border-radius: 5px; font-size: 16px;">
             
-            <button onclick="checkStatus()" 
+            <button onclick="checkStatus()" id="checkBtn"
                     style="width: 100%; background: #0A2A8F; color: white; padding: 14px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s;">
                 Check Status
             </button>
@@ -307,6 +306,8 @@
 </footer>
 
 <script>
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxF5CPu-dmN9_KMWN4tb3j_Uf1jLSIMtX1-ZlaWafQ7DoRvQAvQmofAZL1Ej1Wl8xrA/exec';
+
     function scrollToSection(event, sectionId) {
         event.preventDefault(); 
         const targetSection = document.getElementById(sectionId);
@@ -318,15 +319,16 @@
         }
     }
 
-    function checkStatus() {
-        var idInput = document.getElementById("parentId").value.trim();
-        var resultDiv = document.getElementById("statusResult");
+    async function checkStatus() {
+        const idInput = document.getElementById("parentId").value.trim();
+        const resultDiv = document.getElementById("statusResult");
+        const checkBtn = document.getElementById("checkBtn");
         
         if (idInput === "") {
             resultDiv.style.display = "block";
             resultDiv.style.background = "#FFEBEE";
             resultDiv.style.color = "#C62828";
-            resultDiv.innerText = "Please enter a valid ID number.";
+            resultDiv.innerText = "Please enter a valid Parent/Guardian ID number.";
             return;
         }
         
@@ -334,34 +336,47 @@
         resultDiv.style.background = "#FFF9C4";
         resultDiv.style.color = "#F57F17";
         resultDiv.innerText = "Searching records, please wait...";
-        
-        google.script.run
-            .withSuccessHandler(showStatusResult)
-            .withFailureHandler(handleStatusError)
-            .searchApplicationStatus(idInput);
-    }
 
-    function showStatusResult(response) {
-        var resultDiv = document.getElementById("statusResult");
-        resultDiv.style.display = "block";
-        
-        if (response.found) {
-            resultDiv.style.background = "#E8F5E9";
-            resultDiv.style.color = "#2E7D32";
-            resultDiv.innerHTML = "<strong>Learner:</strong> " + response.learnerName + "<br><strong>Status:</strong> " + response.status;
-        } else {
+        checkBtn.disabled = true;
+        checkBtn.style.opacity = "0.7";
+
+        try {
+            const fetchUrl = SCRIPT_URL + "?parentId=" + encodeURIComponent(idInput);
+            const response = await fetch(fetchUrl);
+            
+            if (!response.ok) {
+                throw new Error("HTTP Error " + response.status);
+            }
+
+            const data = await response.json();
+
+            if (data.found) {
+                let badgeColor = "#0A2A8F";
+                if (data.status === "Approved") badgeColor = "#274E13";
+                if (data.status === "Rejected") badgeColor = "#990000";
+                if (data.status === "Pending") badgeColor = "#7F6000";
+
+                resultDiv.style.background = "#E8F5E9";
+                resultDiv.style.color = "#2E7D32";
+                resultDiv.innerHTML = 
+                    "<strong>Learner Name:</strong> " + data.learnerName + " " + data.learnerSurname + "<br>" +
+                    "<strong>Grade Applying For:</strong> " + data.grade + "<br>" +
+                    "<strong>Status:</strong> <span style='color:" + badgeColor + "; font-weight:bold;'>" + data.status + "</span>";
+            } else {
+                resultDiv.style.background = "#FFEBEE";
+                resultDiv.style.color = "#C62828";
+                resultDiv.innerText = data.message || "No application record found for this ID number.";
+            }
+
+        } catch (error) {
+            console.error("Status check error:", error);
             resultDiv.style.background = "#FFEBEE";
             resultDiv.style.color = "#C62828";
-            resultDiv.innerText = "No application record found for this ID number.";
+            resultDiv.innerText = "Unable to connect to the server. Please try again later.";
+        } finally {
+            checkBtn.disabled = false;
+            checkBtn.style.opacity = "1";
         }
-    }
-
-    function handleStatusError(error) {
-        var resultDiv = document.getElementById("statusResult");
-        resultDiv.style.display = "block";
-        resultDiv.style.background = "#FFEBEE";
-        resultDiv.style.color = "#C62828";
-        resultDiv.innerText = "System error occurred. Please try again later.";
     }
 </script>
 
