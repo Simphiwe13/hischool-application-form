@@ -5,231 +5,774 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2027 Learner Application Form</title>
 </head>
-<body style="margin: 0; font-family: Arial, sans-serif; background: #f4f8ff;">
 
-<!-- Custom High School Application Form -->
-<section id="application-section" style="padding: 40px 10%;">
-    <div style="max-width: 750px; margin: 0 auto; background: #ffffff; padding: 35px; border-radius: 10px; border-top: 6px solid #0A2A8F; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-        
-        <h2 style="color: #0A2A8F; text-align: center; border: none; padding-left: 0; margin-bottom: 8px;">
+<body style="margin:0; font-family:Arial,sans-serif; background:#f4f8ff;">
+
+<section id="application-section" style="padding:40px 10%;">
+
+    <div style="
+        max-width:750px;
+        margin:0 auto;
+        background:#ffffff;
+        padding:35px;
+        border-radius:10px;
+        border-top:6px solid #0A2A8F;
+        box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    ">
+
+        <h2 style="
+            color:#0A2A8F;
+            text-align:center;
+            margin-bottom:8px;
+        ">
             2027 Learner Application Form
         </h2>
-        <p style="text-align: center; color: #555; margin-bottom: 30px; font-size: 14px;">
-            Please complete all required fields accurately. Once submitted, your application status can be tracked using the Parent/Guardian ID.
+
+        <p style="
+            text-align:center;
+            color:#555;
+            margin-bottom:30px;
+            font-size:14px;
+        ">
+            Please complete all required fields accurately.
+            Once submitted, your application status can be tracked
+            using the Parent/Guardian ID.
         </p>
 
-        <form id="hsApplicationForm" onsubmit="submitForm(event)" style="display: flex; flex-direction: column; gap: 20px;" novalidate>
-            
-            <!-- SECTION 1: LEARNER DETAILS -->
-            <div style="border-bottom: 2px solid #eef4ff; padding-bottom: 15px;">
-                <h3 style="color: #0A2A8F; margin-bottom: 15px; font-size: 18px;">1. Learner Information</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">First Name(s) *</label>
-                        <input type="text" id="learnerName" required placeholder="e.g. Sipho" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
+
+        <!-- APPLICATION FORM -->
+
+        <form
+            id="hsApplicationForm"
+            onsubmit="submitForm(event)"
+            style="display:flex; flex-direction:column; gap:20px;"
+            novalidate
+        >
+
+            <!-- LEARNER DETAILS -->
+
+            <div style="
+                border-bottom:2px solid #eef4ff;
+                padding-bottom:15px;
+            ">
+
+                <h3 style="
+                    color:#0A2A8F;
+                    margin-bottom:15px;
+                    font-size:18px;
+                ">
+                    1. Learner Information
+                </h3>
+
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                    gap:15px;
+                ">
 
                     <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Surname *</label>
-                        <input type="text" id="learnerSurname" required placeholder="e.g. Dlamini" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            First Name(s) *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="learnerName"
+                            required
+                            placeholder="e.g. Sipho"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
                     </div>
+
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Surname *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="learnerSurname"
+                            required
+                            placeholder="e.g. Dlamini"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Learner ID / Date of Birth *</label>
-                        <input type="text" id="learnerId" required placeholder="ID Number or YYYY-MM-DD" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                    gap:15px;
+                    margin-top:15px;
+                ">
 
                     <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Gender *</label>
-                        <select id="gender" required style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Learner ID / Date of Birth *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="learnerId"
+                            required
+                            placeholder="ID Number or YYYY-MM-DD"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Gender *
+                        </label>
+
+                        <select
+                            id="gender"
+                            required
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
                             <option value="">Select Gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>
+
                     </div>
+
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                    gap:15px;
+                    margin-top:15px;
+                ">
+
                     <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Grade Applying For *</label>
-                        <select id="grade" required style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Grade Applying For *
+                        </label>
+
+                        <select
+                            id="grade"
+                            required
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
                             <option value="">Select Grade</option>
                             <option value="Grade 8">Grade 8</option>
                             <option value="Grade 9">Grade 9</option>
                             <option value="Grade 10">Grade 10</option>
                             <option value="Grade 11">Grade 11</option>
                             <option value="Grade 12">Grade 12</option>
+
                         </select>
+
                     </div>
+
 
                     <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Previous / Current School *</label>
-                        <input type="text" id="prevSchool" required placeholder="Name of primary or current school" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Previous / Current School *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="prevSchool"
+                            required
+                            placeholder="Name of primary or current school"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
                     </div>
+
                 </div>
+
             </div>
 
-            <!-- SECTION 2: PARENT / GUARDIAN DETAILS -->
+
+
+            <!-- PARENT DETAILS -->
+
+            <div style="
+                border-bottom:2px solid #eef4ff;
+                padding-bottom:15px;
+            ">
+
+                <h3 style="
+                    color:#0A2A8F;
+                    margin-bottom:15px;
+                    font-size:18px;
+                ">
+                    2. Parent / Guardian Details
+                </h3>
+
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                    gap:15px;
+                ">
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Full Name & Surname *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="parentName"
+                            required
+                            placeholder="Parent or Guardian Name"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Parent ID / Passport Number *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="appParentId"
+                            required
+                            placeholder="13-Digit SA ID or Passport"
+                            maxlength="13"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+                    gap:15px;
+                    margin-top:15px;
+                ">
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Phone Number *
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            required
+                            placeholder="e.g. 0821234567"
+                            maxlength="10"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label style="
+                            font-weight:bold;
+                            font-size:14px;
+                            display:block;
+                            margin-bottom:5px;
+                        ">
+                            Email Address *
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            placeholder="e.g. parent@example.com"
+                            style="
+                                width:100%;
+                                padding:10px;
+                                border:1px solid #64748B;
+                                border-radius:5px;
+                                font-size:14px;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div style="margin-top:15px;">
+
+                    <label style="
+                        font-weight:bold;
+                        font-size:14px;
+                        display:block;
+                        margin-bottom:5px;
+                    ">
+                        Residential Address *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="address"
+                        required
+                        placeholder="Street / Village name, Town, Postal Code"
+                        style="
+                            width:100%;
+                            padding:10px;
+                            border:1px solid #64748B;
+                            border-radius:5px;
+                            font-size:14px;
+                            box-sizing:border-box;
+                        "
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DOCUMENT UPLOAD -->
+
             <div>
-                <h3 style="color: #0A2A8F; margin-bottom: 15px; font-size: 18px;">2. Parent / Guardian Details</h3>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Full Name & Surname *</label>
-                        <input type="text" id="parentName" required placeholder="Parent or Guardian Name" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
 
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Parent ID / Passport Number *</label>
-                        <input type="text" id="appParentId" required placeholder="13-Digit SA ID or Passport" maxlength="13" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
+                <h3 style="
+                    color:#0A2A8F;
+                    margin-bottom:15px;
+                    font-size:18px;
+                ">
+                    3. Document Upload
+                </h3>
+
+                <div>
+
+                    <label style="
+                        font-weight:bold;
+                        font-size:14px;
+                        display:block;
+                        margin-bottom:5px;
+                    ">
+                        Upload Document (ID / Report / Proof of Residence)
+                    </label>
+
+                    <input
+                        type="file"
+                        id="documentFile"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        style="
+                            width:100%;
+                            padding:10px;
+                            border:1px solid #64748B;
+                            border-radius:5px;
+                            font-size:14px;
+                            box-sizing:border-box;
+                            background:#fff;
+                        "
+                    >
+
+                    <p style="font-size:12px; color:#666; margin-top:5px;">
+                        Max file size: 5MB. Accepted formats: PDF, JPG, PNG.
+                    </p>
+
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px;">
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Phone Number *</label>
-                        <input type="tel" id="phone" required placeholder="e.g. 0821234567" maxlength="10" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
-
-                    <div>
-                        <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Email Address *</label>
-                        <input type="email" id="email" required placeholder="e.g. parent@example.com" 
-                               style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                    </div>
-                </div>
-
-                <div style="margin-top: 15px;">
-                    <label style="font-weight: bold; font-size: 14px; display: block; margin-bottom: 5px;">Residential Address *</label>
-                    <input type="text" id="address" required placeholder="Street / Village name, Town, Postal Code" 
-                           style="width: 100%; padding: 10px; border: 1px solid #64748B; border-radius: 5px; font-size: 14px; box-sizing: border-box;">
-                </div>
             </div>
+
+
 
             <!-- SUBMIT BUTTON -->
-            <button type="submit" id="submitAppBtn" 
-                    style="background: #0A2A8F; color: white; padding: 14px; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 10px; transition: 0.2s;">
+
+            <button
+                type="submit"
+                id="submitAppBtn"
+                style="
+                    background:#0A2A8F;
+                    color:white;
+                    padding:14px;
+                    border:none;
+                    border-radius:5px;
+                    font-weight:bold;
+                    font-size:16px;
+                    cursor:pointer;
+                    margin-top:10px;
+                "
+            >
                 Submit Application
             </button>
+
         </form>
 
-        <!-- RESPONSE NOTIFICATION BOX -->
-        <div id="appResponse" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none; text-align: center; font-weight: bold;"></div>
+
+
+        <!-- RESPONSE -->
+
+        <div
+            id="appResponse"
+            style="
+                margin-top:20px;
+                padding:15px;
+                border-radius:5px;
+                display:none;
+                text-align:center;
+                font-weight:bold;
+            "
+        ></div>
+
     </div>
+
 </section>
 
+
+
 <script>
-  // Your Deployed Google Apps Script Web App URL
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsIH7IO0M-IS7RgA2Jbg8--oNmuTd3wxtfx4C-r3r7X9IPpBlq7UdoYkX1o24x5YTH/exec';
 
-  function showError(message) {
-    const responseBox = document.getElementById('appResponse');
-    responseBox.style.display = 'block';
-    responseBox.style.background = '#f8d7da';
-    responseBox.style.color = '#842029';
-    responseBox.innerText = message;
-  }
+    const SCRIPT_URL =
+        'https://script.google.com/macros/s/AKfycbxF5CPu-dmN9_KMWN4tb3j_Uf1jLSIMtX1-ZlaWafQ7DoRvQAvQmofAZL1Ej1Wl8xrA/exec';
 
-  function submitForm(e) {
-    e.preventDefault();
 
-    const form = document.getElementById('hsApplicationForm');
-    const submitBtn = document.getElementById('submitAppBtn');
-    const responseBox = document.getElementById('appResponse');
-
-    // 1. Gather values
-    const learnerName = document.getElementById('learnerName').value.trim();
-    const learnerSurname = document.getElementById('learnerSurname').value.trim();
-    const learnerId = document.getElementById('learnerId').value.trim();
-    const gender = document.getElementById('gender').value;
-    const grade = document.getElementById('grade').value;
-    const prevSchool = document.getElementById('prevSchool').value.trim();
-    const parentName = document.getElementById('parentName').value.trim();
-    const appParentId = document.getElementById('appParentId').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const address = document.getElementById('address').value.trim();
-
-    // 2. Data Validations
-    if (!learnerName || !learnerSurname || !learnerId || !gender || !grade || !prevSchool || !parentName || !appParentId || !phone || !email || !address) {
-      showError('Please complete all required fields.');
-      return;
-    }
-
-    // SA ID / Passport Check (Must be 13 digits if numeric, or at least 6 characters for passport)
-    if (appParentId.length < 6) {
-      showError('Parent/Guardian ID or Passport must be at least 6 characters.');
-      return;
-    }
-
-    // SA Phone Validation (Must start with 0 and contain exactly 10 digits)
-    const phoneRegex = /^0[0-9]{9}$/;
-    if (!phoneRegex.test(phone)) {
-      showError('Phone number must start with 0 and be exactly 10 digits (e.g. 0821234567).');
-      return;
-    }
-
-    // Email Address Validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      showError('Please enter a valid email address.');
-      return;
-    }
-
-    // 3. Preparation for Send
-    responseBox.style.display = 'none';
-    submitBtn.disabled = true;
-    submitBtn.innerText = 'Submitting Application...';
-
-    const formData = {
-      learnerName,
-      learnerSurname,
-      learnerId,
-      gender,
-      grade,
-      prevSchool,
-      parentName,
-      appParentId,
-      phone,
-      email,
-      address
-    };
-
-    // 4. Submit Payload to Google Apps Script
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.result === 'success') {
+    function showMessage(message, success) {
+        const responseBox = document.getElementById('appResponse');
         responseBox.style.display = 'block';
-        responseBox.style.background = '#d1e7dd';
-        responseBox.style.color = '#0f5132';
-        responseBox.innerText = 'Application submitted successfully! Keep your Parent ID for status tracking.';
-        form.reset();
-      } else {
-        throw new Error(data.error || 'Submission failed');
-      }
-    })
-    .catch(error => {
-      showError('Submission error. Please check your network connection and try again.');
-      console.error('Submission Error:', error.message);
-    })
-    .finally(() => {
-      submitBtn.disabled = false;
-      submitBtn.innerText = 'Submit Application';
-    });
-  }
+
+        if (success) {
+            responseBox.style.background = '#d1e7dd';
+            responseBox.style.color = '#0f5132';
+        } else {
+            responseBox.style.background = '#f8d7da';
+            responseBox.style.color = '#842029';
+        }
+
+        responseBox.innerText = message;
+    }
+
+
+    /* Helper function to convert file to Base64 */
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+
+    async function submitForm(e) {
+        e.preventDefault();
+
+        const form = document.getElementById('hsApplicationForm');
+        const submitBtn = document.getElementById('submitAppBtn');
+
+        const learnerName = document.getElementById('learnerName').value.trim();
+        const learnerSurname = document.getElementById('learnerSurname').value.trim();
+        const learnerId = document.getElementById('learnerId').value.trim();
+        const gender = document.getElementById('gender').value;
+        const grade = document.getElementById('grade').value;
+        const prevSchool = document.getElementById('prevSchool').value.trim();
+        const parentName = document.getElementById('parentName').value.trim();
+        const appParentId = document.getElementById('appParentId').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const address = document.getElementById('address').value.trim();
+        const fileInput = document.getElementById('documentFile');
+
+        /* Required fields check */
+        if (
+            !learnerName ||
+            !learnerSurname ||
+            !learnerId ||
+            !gender ||
+            !grade ||
+            !prevSchool ||
+            !parentName ||
+            !appParentId ||
+            !phone ||
+            !email ||
+            !address
+        ) {
+            showMessage('Please complete all required fields.', false);
+            return;
+        }
+
+        /* Learner Names */
+        const nameRegex = /^[a-zA-Z\s'-]{2,}$/;
+        if (!nameRegex.test(learnerName)) {
+            showMessage('Learner First Name(s) should contain only letters and be at least 2 characters.', false);
+            return;
+        }
+        if (!nameRegex.test(learnerSurname)) {
+            showMessage('Learner Surname should contain only letters and be at least 2 characters.', false);
+            return;
+        }
+
+        /* Learner ID / DOB */
+        const isLearnerIdNumeric = /^\d+$/.test(learnerId);
+        const dobRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+        if (isLearnerIdNumeric) {
+            if (learnerId.length !== 13) {
+                showMessage('Incomplete Learner ID. SA ID must be exactly 13 digits.', false);
+                return;
+            }
+        } else if (!dobRegex.test(learnerId)) {
+            showMessage('Learner ID/DOB must be a 13-digit SA ID or formatted as YYYY-MM-DD.', false);
+            return;
+        }
+
+        /* Parent Name */
+        if (!nameRegex.test(parentName)) {
+            showMessage('Parent/Guardian name should contain only letters and be at least 2 characters.', false);
+            return;
+        }
+
+        /* Parent ID / Passport */
+        const isParentIdNumeric = /^\d+$/.test(appParentId);
+        if (isParentIdNumeric) {
+            if (appParentId.length !== 13) {
+                showMessage('Incomplete SA ID. Parent/Guardian ID must be exactly 13 digits.', false);
+                return;
+            }
+        } else {
+            const passportRegex = /^[a-zA-Z0-9]{6,9}$/;
+            if (!passportRegex.test(appParentId)) {
+                showMessage('Invalid Passport number. Passport must be 6–9 alphanumeric characters.', false);
+                return;
+            }
+        }
+
+        /* Phone & Email */
+        const phoneRegex = /^0[0-9]{9}$/;
+        if (!phoneRegex.test(phone)) {
+            showMessage('Phone number must start with 0 and be exactly 10 digits (e.g. 0821234567).', false);
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showMessage('Please enter a valid email address.', false);
+            return;
+        }
+
+        if (address.length < 5) {
+            showMessage('Please enter a complete residential address (at least 5 characters).', false);
+            return;
+        }
+
+        /* File validation (Optional file, but max size check if attached) */
+        let fileData = null;
+        let fileName = '';
+        let fileMimeType = '';
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            /* Limit file size to 5MB to avoid script timeout */
+            if (file.size > 5 * 1024 * 1024) {
+                showMessage('File size exceeds the 5MB limit. Please upload a smaller file.', false);
+                return;
+            }
+
+            fileName = file.name;
+            fileMimeType = file.type;
+            fileData = await fileToBase64(file);
+        }
+
+        /* Disable button during submission */
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.7';
+        submitBtn.style.cursor = 'not-allowed';
+        submitBtn.innerText = 'Uploading & Submitting Application...';
+
+        document.getElementById('appResponse').style.display = 'none';
+
+        /* Build URL encoded parameters */
+        const payload = new URLSearchParams();
+        payload.append('learnerName', learnerName);
+        payload.append('learnerSurname', learnerSurname);
+        payload.append('learnerId', learnerId);
+        payload.append('gender', gender);
+        payload.append('grade', grade);
+        payload.append('prevSchool', prevSchool);
+        payload.append('parentName', parentName);
+        payload.append('appParentId', appParentId);
+        payload.append('phone', phone);
+        payload.append('email', email);
+        payload.append('address', address);
+
+        if (fileData) {
+            payload.append('fileData', fileData);
+            payload.append('fileName', fileName);
+            payload.append('fileMimeType', fileMimeType);
+        }
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: payload
+            });
+
+            if (!response.ok) {
+                throw new Error('Google Apps Script returned HTTP ' + response.status);
+            }
+
+            const responseText = await response.text();
+            let result;
+
+            try {
+                result = JSON.parse(responseText);
+            } catch (jsonError) {
+                throw new Error('The server responded, but did not return a valid JSON response.');
+            }
+
+            if (result && result.result === 'success') {
+                showMessage(
+                    'Application submitted successfully! Document saved to Drive.',
+                    true
+                );
+                form.reset();
+            } else {
+                const serverError = result && result.error ? result.error : 'Unknown server error.';
+                throw new Error(serverError);
+            }
+
+        } catch (error) {
+            console.error('Submission Error:', error);
+            showMessage('Submission failed: ' + error.message, false);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.innerText = 'Submit Application';
+        }
+    }
+
 </script>
 
 </body>
