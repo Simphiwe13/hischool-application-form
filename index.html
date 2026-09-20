@@ -285,7 +285,7 @@
             </button>
         </div>
 
-        <div id="statusResult" style="margin-top: 25px; padding: 15px; border-radius: 5px; display: none; text-align: center; font-weight: bold;">
+        <div id="statusResult" style="margin-top: 25px; padding: 15px; border-radius: 5px; display: none; text-align: center; font-weight: bold; line-height: 1.6;">
         </div>
     </div>
 </section>
@@ -328,6 +328,7 @@
             resultDiv.style.display = "block";
             resultDiv.style.background = "#FFEBEE";
             resultDiv.style.color = "#C62828";
+            resultDiv.style.border = "1px solid #EF9A9A";
             resultDiv.innerText = "Please enter a valid Parent/Guardian ID number.";
             return;
         }
@@ -335,6 +336,7 @@
         resultDiv.style.display = "block";
         resultDiv.style.background = "#FFF9C4";
         resultDiv.style.color = "#F57F17";
+        resultDiv.style.border = "1px solid #FFF59D";
         resultDiv.innerText = "Searching records, please wait...";
 
         checkBtn.disabled = true;
@@ -351,20 +353,44 @@
             const data = await response.json();
 
             if (data.found) {
-                let badgeColor = "#0A2A8F";
-                if (data.status === "Approved") badgeColor = "#274E13";
-                if (data.status === "Rejected") badgeColor = "#990000";
-                if (data.status === "Pending") badgeColor = "#7F6000";
+                const normalizedStatus = String(data.status).trim().toLowerCase();
 
-                resultDiv.style.background = "#E8F5E9";
-                resultDiv.style.color = "#2E7D32";
+                // Define styling variables for each status condition
+                let bgColor = "#E8F5E9";      // Default Green Light
+                let textColor = "#2E7D32";    // Dark Green
+                let borderColor = "#A5D6A7";  // Soft Green Border
+                let badgeBg = "#2E7D32";
+
+                if (normalizedStatus === "approved") {
+                    bgColor = "#E8F5E9";      // Soft Green
+                    textColor = "#1B5E20";
+                    borderColor = "#A5D6A7";
+                    badgeBg = "#2E7D32";
+                } else if (normalizedStatus === "rejected" || normalizedStatus === "unsuccessful") {
+                    bgColor = "#FFEBEE";      // Soft Red
+                    textColor = "#C62828";
+                    borderColor = "#EF9A9A";
+                    badgeBg = "#C62828";
+                } else {
+                    // Pending / Under Review (Yellow/Gold)
+                    bgColor = "#FFFDE7";      // Soft Yellow
+                    textColor = "#F57F17";
+                    borderColor = "#FFF59D";
+                    badgeBg = "#F57F17";
+                }
+
+                resultDiv.style.background = bgColor;
+                resultDiv.style.color = textColor;
+                resultDiv.style.border = "1px solid " + borderColor;
+                
                 resultDiv.innerHTML = 
                     "<strong>Learner Name:</strong> " + data.learnerName + " " + data.learnerSurname + "<br>" +
-                    "<strong>Grade Applying For:</strong> " + data.grade + "<br>" +
-                    "<strong>Status:</strong> <span style='color:" + badgeColor + "; font-weight:bold;'>" + data.status + "</span>";
+                    "<strong>Grade Applying For:</strong> Grade " + data.grade + "<br>" +
+                    "<strong>Status:</strong> <span style='background:" + badgeBg + "; color:white; padding:3px 10px; border-radius:12px; font-size:14px; display:inline-block; margin-top:5px;'>" + data.status + "</span>";
             } else {
                 resultDiv.style.background = "#FFEBEE";
                 resultDiv.style.color = "#C62828";
+                resultDiv.style.border = "1px solid #EF9A9A";
                 resultDiv.innerText = data.message || "No application record found for this ID number.";
             }
 
@@ -372,6 +398,7 @@
             console.error("Status check error:", error);
             resultDiv.style.background = "#FFEBEE";
             resultDiv.style.color = "#C62828";
+            resultDiv.style.border = "1px solid #EF9A9A";
             resultDiv.innerText = "Unable to connect to the server. Please try again later.";
         } finally {
             checkBtn.disabled = false;
